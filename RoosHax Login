@@ -1,0 +1,61 @@
+import customtkinter
+import json
+import os
+
+# Load Custom Theme (Orange)
+script_dir = os.path.dirname(os.path.abspath(__file__))  # Gets script directory
+theme_path = os.path.join(script_dir, "orange.json")
+
+# Set CTk Theme
+customtkinter.set_default_color_theme(theme_path)
+
+class LoginApp(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("RoosHax Login")
+        self.geometry("400x300")
+        self.resizable(False, False)
+
+        # App Frame
+        self.login_frame = customtkinter.CTkFrame(self, corner_radius=6)
+        self.login_frame.pack(pady=1, fill="both", expand=True)
+
+        self.label = customtkinter.CTkLabel(self.login_frame, text="User Login", font=("Helvetica", 20, "bold"))
+        self.label.pack(pady=(20, 10))
+
+        self.username_entry = customtkinter.CTkEntry(self.login_frame, placeholder_text="Username")
+        self.username_entry.pack(pady=10, padx=20)
+
+        self.password_entry = customtkinter.CTkEntry(self.login_frame, placeholder_text="Password", show="*")
+        self.password_entry.pack(pady=10, padx=20)
+
+        self.login_button = customtkinter.CTkButton(self.login_frame, text="Login", command=self.login_action)
+        self.login_button.pack(pady=20, padx=20)
+
+        # Switch for Light/Dark Mode (Default: Dark Orange)
+        self.switch_appearance = customtkinter.CTkSwitch(self.login_frame, text="Switch to Light", command=self.toggle_mode)
+        self.switch_appearance.pack(pady=10)
+
+        # Set Default Mode to Dark Orange
+        self.dark_mode = True
+        customtkinter.set_appearance_mode("dark")
+
+    def login_action(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+        print(f"Login Attempt: {username} / {password}")
+
+    def toggle_mode(self):
+        if self.dark_mode:
+            customtkinter.set_appearance_mode("light")
+            self.switch_appearance.configure(text="Switch to Dark")  
+        else:
+            customtkinter.set_appearance_mode("dark")
+            self.switch_appearance.configure(text="Switch to Light")  
+
+        self.dark_mode = not self.dark_mode  
+
+if __name__ == "__main__":
+    app = LoginApp()
+    app.mainloop()
