@@ -44,7 +44,7 @@ class LoginApp(customtkinter.CTk):
     def login_action(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
-        print(f"Login Attempt: {username} / {password}")
+        #print(f"Login Attempt: {username} / {password}")
 
     def toggle_mode(self):
         if self.dark_mode:
